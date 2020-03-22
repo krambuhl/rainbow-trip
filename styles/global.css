@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--type-family);
+  font-size: var(--type-body-size);
+  font-style: var(--type-body-style);
+  font-weight: var(--type-body-weight);
+  line-height: var(--type-body-line-height);
+
+  ::selection {
+    background-color: var(--color-highlight);
+    color: var(--color-highlight-text);
+  }
+}
+
+a {
+  color: var(--color-subtle);
+
+  &:focus,
+  &:hover {
+    color: var(--color-highlight);
+  }
+}
+
+small {
+  font-size: var(--type-small-size);
+  font-style: var(--type-small-style);
+  font-weight: var(--type-small-weight);
+  line-height: var(--type-small-line-height);
+}

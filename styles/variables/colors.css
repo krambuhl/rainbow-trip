@@ -1,0 +1,15 @@
+:root {
+  --color-background: #000;
+  --color-text: #fff;
+  --color-subtle: #bbb;
+  --color-highlight: #ba40c1;
+  --color-highlight-text: #fff;
+
+  @media (prefers-color-scheme: light) {
+    --color-background: #fff;
+    --color-text: #000;
+    --color-subtle: #666;
+    --color-highlight: #a327aa;
+    --color-highlight-text: #fff;
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "rainbow-trip",
+  "version": "1.0.0",
+  "main": "next.config.js",
+  "engines": {
+    "node": "^10"
+  },
+  "repository": "git@github.com:krambuhl/rainbow-trip.git",
+  "author": "Eevee Kreevee <thekrambuhl@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build"
+  },
+  "dependencies": {
+    "babel-loader": "^8.0.6",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "classnames": "^2.2.6",
+    "cross-fetch": "^3.0.4",
+    "next": "^9.3.0",
+    "postcss-functions": "^3.0.0",
+    "postcss-import": "^12.0.1",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-use": "^13.27.0",
+    "reset-css": "^5.0.1",
+    "swr": "^0.1.18"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^5.2.0",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-react": "^7.19.0",
+    "next-compose-plugins": "^2.2.0",
+    "next-offline": "^5.0.0",
+    "postcss-math": "^0.0.10",
+    "postcss-nested": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-reporter": "^6.0.1",
+    "postcss-responsive-type": "^1.0.0",
+    "postcss-simple-vars": "^5.0.2",
+    "stylelint": "^13.2.1",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.0.0"
+  }
+}

@@ -1,0 +1,24 @@
+.root {
+  font-family: var(--type-family);
+}
+
+.h1 {
+  font-size: var(--type-h1-size);
+  font-style: var(--type-h1-style);
+  font-weight: var(--type-h1-weight);
+  line-height: var(--type-h1-line-height);
+}
+
+.h2 {
+  font-size: var(--type-h2-size);
+  font-style: var(--type-h2-style);
+  font-weight: var(--type-h2-weight);
+  line-height: var(--type-h2-line-height);
+}
+
+.h3 {
+  font-size: var(--type-h3-size);
+  font-style: var(--type-h3-style);
+  font-weight: var(--type-h3-weight);
+  line-height: var(--type-h3-line-height);
+}

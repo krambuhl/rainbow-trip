@@ -1,0 +1,19 @@
+$xs: 400px;
+$sm: 540px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
+
+/* upward */
+@custom-media --xs (width >= $xs);
+@custom-media --sm (width >= $sm);
+@custom-media --md (width >= $md);
+@custom-media --lg (width >= $lg);
+@custom-media --xl (width >= $xl);
+
+/* downward */
+@custom-media --lt-xs (width < $xs);
+@custom-media --lt-sm (width < $sm);
+@custom-media --lt-md (width < $md);
+@custom-media --lt-lg (width < $lg);
+@custom-media --lt-xl (width < $xl);

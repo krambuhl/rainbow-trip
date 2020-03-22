@@ -1,0 +1,30 @@
+{
+  "extends": "eslint:recommended",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "commonjs": true
+  },
+  "globals": {
+    "process": true,
+    "window": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "react/prop-types": 0,
+    "react/jsx-uses-vars": [2],
+    "react/jsx-indent": ["error", 2],
+    "indent": ["error", 2],
+    "prefer-template": 2,
+    "no-console": 0,
+    "semi": ["error", "never"],
+    "object-curly-spacing": ["error", "always"]
+  }
+}

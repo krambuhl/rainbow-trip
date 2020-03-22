@@ -1,0 +1,134 @@
+$range-min: 400px;
+$range-mid: 768px;
+$range-max: 1280px;
+
+$body-size-min: 18px;
+$body-size-max: 24px;
+$body-line-height-min: resolve($body-size-min * 1.45);
+$body-line-height-max: resolve($body-size-max * 1.4);
+
+$small-size-min: 14px;
+$small-size-max: 18px;
+$small-line-height-min: resolve($small-size-min * 1.4);
+$small-line-height-max: resolve($small-size-max * 1.4);
+
+$h1-size-min: 32px;
+$h1-size-mid: 54px;
+$h1-size-max: 96px;
+$h1-line-height-min: resolve($h1-size-min * 1.2);
+$h1-line-height-mid: resolve($h1-size-mid * 1.1);
+$h1-line-height-max: resolve($h1-size-max * 1);
+
+$h2-size-min: 24px;
+$h2-size-mid: 40px;
+$h2-size-max: 64px;
+$h2-line-height-min: resolve($h2-size-min * 1.25);
+$h2-line-height-mid: resolve($h2-size-mid * 1.2);
+$h2-line-height-max: resolve($h2-size-max * 1.15);
+
+$h3-size-min: 21px;
+$h3-size-mid: 32px;
+$h3-size-max: 48px;
+$h3-line-height-min: resolve($h3-size-min * 1.35);
+$h3-line-height-mid: resolve($h3-size-mid * 1.3);
+$h3-line-height-max: resolve($h3-size-max * 1.25);
+
+:root {
+  --type-family: pennsylvania, monospace;
+  --type-weight-normal: 400;
+  --type-weight-bold: 700;
+
+  /* body */
+  --type-body-weight: var(--type-weight-normal);
+  --type-body-style: normal;
+  --type-body-size: $body-size-min;
+  --type-body-line-height: $body-line-height-min;
+
+  /* small */
+  --type-small-weight: var(--type-weight-normal);
+  --type-small-style: normal;
+  --type-small-size: $small-size-min;
+  --type-small-line-height: $small-line-height-min;
+
+  /* h1 */
+  --type-h1-weight: var(--type-weight-bold);
+  --type-h1-style: italic;
+  --type-h1-size: $h1-size-min;
+  --type-h1-line-height: $h1-line-height-min;
+
+  /* h2 */
+  --type-h2-weight: var(--type-weight-bold);
+  --type-h2-style: italic;
+  --type-h2-size: $h2-size-min;
+  --type-h2-line-height: $h2-line-height-min;
+
+  /* h3 */
+  --type-h3-weight: var(--type-weight-bold);
+  --type-h3-style: italic;
+  --type-h3-size: $h3-size-min;
+  --type-h3-line-height: $h3-line-height-min;
+
+  /* responsive segment min to max */
+  @media (width >= $range-min) and (width < $range-max) {
+    /* body */
+    --type-body-size: responsive($body-size-min, $body-size-max, $range-min, $range-max);
+    --type-body-line-height: responsive($body-line-height-min, $body-line-height-max, $range-min, $range-max);
+
+    /* small */
+    --type-small-size: responsive($small-size-min, $small-size-max, $range-min, $range-max);
+    --type-small-line-height: responsive($small-line-height-min, $small-line-height-max, $range-min, $range-max);
+  }
+
+  /* responsive segment min to mid */
+  @media (width >= $range-min) and (width < $range-mid) {
+    /* h1 */
+    --type-h1-size: responsive($h1-size-min, $h1-size-mid, $range-min, $range-mid);
+    --type-h1-line-height: responsive($h1-line-height-min, $h1-line-height-mid, $range-min, $range-mid);
+
+    /* h2 */
+    --type-h2-size: responsive($h2-size-min, $h2-size-mid, $range-min, $range-mid);
+    --type-h2-line-height: responsive($h2-line-height-min, $h2-line-height-mid, $range-min, $range-mid);
+
+    /* h3 */
+    --type-h3-size: responsive($h3-size-min, $h3-size-mid, $range-min, $range-mid);
+    --type-h3-line-height: responsive($h3-line-height-min, $h3-line-height-mid, $range-min, $range-mid);
+  }
+
+  /* responsive segment mid to max */
+  @media (width >= $range-mid) and (width < $range-max) {
+    /* h1 */
+    --type-h1-size: responsive($h1-size-mid, $h1-size-max, $range-mid, $range-max);
+    --type-h1-line-height: responsive($h1-line-height-mid, $h1-line-height-max, $range-mid, $range-max);
+
+    /* h2 */
+    --type-h2-size: responsive($h2-size-mid, $h2-size-max, $range-mid, $range-max);
+    --type-h2-line-height: responsive($h2-line-height-mid, $h2-line-height-max, $range-mid, $range-max);
+
+    /* h3 */
+    --type-h3-size: responsive($h3-size-mid, $h3-size-max, $range-mid, $range-max);
+    --type-h3-line-height: responsive($h3-line-height-mid, $h3-line-height-max, $range-mid, $range-max);
+  }
+
+  /* max segment */
+  @media (width >= $range-max) {
+    /* body */
+    --type-body-size: $body-size-max;
+    --type-body-line-height: $body-line-height-max;
+
+    /* small */
+    --type-small-size: $small-size-max;
+    --type-small-line-height: $small-line-height-max;
+
+    /* h1 */
+    --type-h1-size: $h1-size-max;
+    --type-h1-line-height: $h1-line-height-max;
+
+    /* h2 */
+    --type-h2-size: $h2-size-max;
+    --type-h2-line-height: $h2-line-height-max;
+
+    /* h3 */
+    --type-h3-size: $h3-size-max;
+    --type-h3-line-height: $h3-line-height-max;
+  }
+}
