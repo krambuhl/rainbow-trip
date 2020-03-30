@@ -17,10 +17,10 @@ const colors = {
   white: '#fff'
 }
 
-const rawRainbow = [
+const rawRainbow2 = [
   colors.violet,
   colors.purple,
-  colors.blue,
+  // colors.blue,
   colors.teal,
   // colors.green,
   // colors.yellow,
@@ -31,69 +31,69 @@ const rawRainbow = [
   // colors.black
 ]
 
-const rawRainbow2 = [
-  colors.yellow,
-  colors.orange,
-  colors.red,
+const rawRainbow = [
+  colors.maroon,
+  // colors.orange,
+  colors.purple,
+  // colors.teal,
+  colors.violet,
+  // colors.black,
+  colors.white
+  // colors.red,
 ]
 
-const rainbow = Array(40).fill(null).map(
-  (n, i) => rawRainbow[
-    Math.floor(
-      (i * 3)
-      % rawRainbow.length
+const sides = Array(30).fill(30)
+
+function createStyleGenerator() {
+  return function getStyle(
+    { time, slowTime, cycleTime, slowCycleTime },
+    { outer, inner }
+  ) {
+    const pattern = outer % 5
+    const bow = rawRainbow
+
+    const target = (
+      (time * (inner + 1)) +
+      (slowTime * (outer + 1))
     )
-  ]
-)
 
-const rainbow2 = Array(40).fill(null).map(
-  (n, i) => rawRainbow2[
-    Math.floor(
-      i
-      % rawRainbow2.length
-    )
-  ]
-)
+    const color = bow[
+      Math.floor(target * bow.length) % bow.length
+    ]
 
-
-// const sides = []
-const sides = Array(40).fill(40)
-
-function createStyleGenerator({ offset, invert }) {
-  return function getStyle({ raw, inv }, { outer, inner }) {
-    const p1 = Math.abs(Math.sin(raw * inner))
-    const p2 = Math.abs(Math.cos(inv * outer))
-
-    const bow = outer > 14 ? rainbow : rainbow2
-    const pattern = outer % 2 & inner % 2 ? p1 : p2
-
-    const color = bow[Math.floor(pattern * bow.length) % bow.length]
+    const math = (slowCycleTime / 1) * ((inner * 16) / (outer + 1))
 
     return {
-      backgroundColor: color
+      backgroundColor: color,
+      boxShadow: `inset black 0 0 0 ${2 + (math)}px`,
       // backgroundImage: `linear-gradient(to bottom right, ${color1} 50%, ${color2} 50%)`
     }
   }
 }
 
-const outerGenerator = createStyleGenerator({ offset: 2, invert: false })
-
-const SPEED = 1 / 10000
+const outerGenerator = createStyleGenerator()
+const SPEED = 1 / 100
 
 export default function IndexPage() {
-  const [raw, setRaw] = useState(SPEED * 1000  * 2.608)
+  // const [raw, setRaw] = useState(1.6)
+  const [raw, setRaw] = useState(0)
+
   useRaf(() => {
-    // setRaw(raw + SPEED)
+    setRaw(raw + SPEED)
   }, true)
 
   const handleClick = () => {
-    setRaw(0)
+    setRaw(raw + SPEED)
   }
 
-  const time = {
-    raw,
-    inv: 1 - raw
+  const timeobj = {
+    time: raw,
+    cycleTime: Math.sin(raw % Math.PI),
+    slowTime: raw / 20,
+    slowCycleTime: Math.sin((raw / 20) % Math.PI),
   }
+
+  console.log(timeobj)
 
   return (
     <div
@@ -106,7 +106,7 @@ export default function IndexPage() {
         return (
           <div className="group">
             {list.map((_, inner) => {
-              const outerStyles = outerGenerator(time, { outer, inner })
+              const outerStyles = outerGenerator(timeobj, { outer, inner })
 
               return (
                 <div
@@ -139,10 +139,11 @@ export default function IndexPage() {
           align-items: center;
           justify-content: center;
           flex-grow: 1;
-          width: 16px;
-          height: 16px;
+          width: 24px;
+          height: 24px;
           background-color: black;
           // transition: 1s ease
+          // margin: 1px;
         }
       `}</style>
     </div>
