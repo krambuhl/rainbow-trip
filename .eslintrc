@@ -24,6 +24,7 @@
     "indent": ["error", 2],
     "prefer-template": 2,
     "no-console": 0,
+    "no-unused-vars": ["warn"],
     "semi": ["error", "never"],
     "object-curly-spacing": ["error", "always"]
   }
