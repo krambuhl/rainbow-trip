@@ -85,7 +85,7 @@ export default function IndexPage() {
 
   const equations = useEquations({
     warm: `warmColors[Math.floor((x1 * y1) * Math.abs(sinSlow)) % warmColors.length]`,
-    cool: `coolColors[Math.floor((x1 * y1) * Math.abs(sinSlow)) % coolColors.length]`,
+    cool: `coolColors[Math.floor(((x1 * 0.5) * (y1 * 1.5)) * Math.abs(sinSlow)) % coolColors.length]`,
     colorFlag: 'y < 15'
   })
 
