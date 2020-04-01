@@ -79,7 +79,7 @@ export default function IndexPage() {
   const data3 = TrigHooks.useTan(transport.frame, 0.01)
   const data4 = TrigHooks.useSin(transport.frame, 1)
 
-  const data = { data1, data2, data3, data4 }
+  const data = { data3 }
 
   return (
     <React.Fragment>
