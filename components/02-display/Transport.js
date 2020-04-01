@@ -1,6 +1,7 @@
 import classnames from 'classnames'
 import padLeft from 'pad-left'
 import { Play, Pause, SkipBack } from 'react-feather'
+import _ from 'lodash'
 
 export default function Transport({
   frame,
@@ -27,27 +28,25 @@ export default function Transport({
   return (
     <React.Fragment>
       <div className="root" {...props}>
-        <div className="timestamp">{padLeft(frame.toLocaleString(), 0, '0')}</div>
-
         <div className="btn-group">
-          <button className="btn " onClick={handleRestart}>
-            <SkipBack fill="white" stroke="white" size={20} strokeWidth={1.5} />
+          <button className="btn btn-big" onClick={handleRestart}>
+            <SkipBack fill="white" stroke="white" size={32} strokeWidth={1.5} />
           </button>
 
-          <button className="btn play-pause" onClick={handlePlayPause}>
+          <button className="btn btn-big play-pause" onClick={handlePlayPause}>
             {
               !isPlaying ? (
-                <Play fill="white" stroke="white" size={20} strokeWidth={1.5} />
+                <Play fill="white" stroke="white" size={32} strokeWidth={1.5} />
               ) : (
-                <Pause fill="white" stroke="white" size={20} strokeWidth={1.5} />
+                <Pause fill="white" stroke="white" size={32} strokeWidth={1.5} />
               )
             }
           </button>
         </div>
 
-        <div className="btn-group">
+        <div className="btn-group speed">
           {
-            [-10000, -1000, -100, -30, -10, -3, -1, 1, 3, 10, 30, 100, 1000, 10000].map(value => (
+            _.reverse([1000, 100, 30, 10, 3, 1, -1, -3, -10, -30, -100, -1000]).map(value => (
               <button
                 key={value}
                 className={classnames("btn btn-text", {
@@ -88,6 +87,14 @@ export default function Transport({
           cursor: pointer;
         }
 
+        .btn-big {
+          padding: 12px 16px 10px;
+        }
+
+        .play-pause {
+          padding: ${!isPlaying ? '12px 15px 10px 17px' : '12px 16px 10px'};
+        }
+
         .btn.is-active {
           background-color: white;
           color: black;
@@ -99,13 +106,18 @@ export default function Transport({
           font-family: var(--type-family);
         }
 
-        .play-pause {
-          padding: ${!isPlaying ? '2px 5px 1px 7px' : '2px 6px 1px'};
-          margin-right: 8px;
+        .btn + .btn {
+          margin-left: 2px;
         }
 
-        .btn + .btn {
-          margin-left: 4px;
+        .speed {
+          display: flex;
+          flex-flow: wrap row;
+          padding-top: var(--padding);
+        }
+
+        .speed .btn {
+          margin-bottom: 2px;
         }
 
         .timestamp {

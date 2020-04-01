@@ -1,11 +1,9 @@
-import Container from '@components/display/Container'
-
 export default function Inspector({ data = {} }) {
   const dataKeys = Object.keys(data)
 
   return (
     <React.Fragment>
-      <Container>
+      <div className="root">
         <table>
           <thead>
             <tr>
@@ -19,20 +17,21 @@ export default function Inspector({ data = {} }) {
                 const row = data[key]
                 return (
                   <tr key={key} className="row">
-                    <td>{key}</td>
-                    <td>{row}</td>
+                    <td className="name">{key}</td>
+                    <td className="value">{row}</td>
                   </tr>
                 )
               })
             }
           </tbody>
         </table>
-      </Container>
+      </div>
 
       <style jsx>{`
         table {
           width: 100%;
           table-layout: fixed;
+          text-align: left;
         }
 
         thead {
@@ -47,8 +46,7 @@ export default function Inspector({ data = {} }) {
         th { padding-bottom: 3px; }
         td { padding: 2px; }
 
-        .row { border-top: 2px solid #111; }
-        .name { width: 25%; }
+        .name { width: 120px; }
         .value { width: auto; }
       `}</style>
     </React.Fragment>

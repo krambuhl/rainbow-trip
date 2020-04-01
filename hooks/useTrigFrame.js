@@ -2,7 +2,7 @@ import useFuncFrame from './useFuncFrame'
 
 function createTrigFrame(fn) {
   return function useTrigFrame(frame, rate = 1) {
-    return useFuncFrame(frame, num => fn(num * rate * 1 / 1000))
+    return useFuncFrame(frame, num => fn(num * rate * 1 / 10000))
   }
 }
 

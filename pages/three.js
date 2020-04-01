@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import useTransport from '@hooks/useTransport'
+import useEquations from '@hooks/useEquations'
 import * as TrigHooks from '@hooks/useTrigFrame'
 // import { rgba, mix } from 'polished'
 
 import * as Colors from '@lib/colors'
 
-import Inspector from '@components/display/Inspector'
-import Transport from '@components/display/Transport'
+import Explorer from '@components/display/Explorer'
 import Grid from '@components/display/Grid'
 
-const warm = [
+const warmColors = [
   Colors.FireRed,
   Colors.RoyalRed,
   Colors.YellowCab,
@@ -28,7 +28,7 @@ const warm = [
   // Colors.c,
 ]
 
-const cool = [
+const coolColors = [
   Colors.Malachite,
   Colors.MalachiteDark,
   Colors.SkyBlue,
@@ -39,31 +39,28 @@ const cool = [
   Colors.PurpleRed
 ]
 
-function groupGenerator({ data1, data2, data3 }, { y }) {
-  return {
-    backgroundColor: y < 15 ? Colors.Orangina : Colors.Malachite,
-  }
-}
+function cellGenerator(equations, data, cords) {
+  const { x, y } = cords
+  const { warm, cool, colorFlag } = equations
+  const {
+    sinSlow, sinFast,
+    cosSlow, cosFast,
+    tanSlow, tanFast
+  } = data
 
-function cellGenerator({ data1, data2, data3, data4 }, { x, y }) {
   const x1 = x + 1
-  const y1 = y + 25
+  const y1 = y + 1
 
-  const val1 = Math.abs(data1)
-  const val2 = Math.abs(data2)
-  const val3 = Math.abs(data3)
-  const val4 = Math.abs(data4)
+  try {
+    const warmColor = eval(warm)
+    const coolColor = eval(cool)
+    const flag = eval(colorFlag)
 
-  const warmColor = warm[Math.floor((y1 * y1) * val3 * warm.length * (val3 * x1)) % warm.length]
-  // const warmColor = warm[Math.floor((x1 * y1) * val2) % warm.length]
-  // const warmColor = warm[Math.floor((x1 * val2) + (y1 * val3)) % warm.length]
-
-  const coolColor = cool[Math.floor((y1 * y1) * val3 * cool.length * (val3 * x1)) % cool.length]
-  // const coolColor = cool[Math.floor((x1 * y1) * val2) % cool.length]
-  // const coolColor = cool[Math.floor((x1 * val3) + (y1 * val2)) % cool.length]
-
-  return {
-    backgroundColor: y < 15 ? warmColor : coolColor,
+    return {
+      backgroundColor: flag ? warmColor : coolColor,
+    }
+  } catch (e) {
+    return {}
   }
 }
 
@@ -74,60 +71,49 @@ export default function IndexPage() {
     frame: 0
   })
 
-  const data1 = TrigHooks.useSin(transport.frame, 10)
-  const data2 = TrigHooks.useCos(transport.frame, 1)
-  const data3 = TrigHooks.useTan(transport.frame, 0.01)
-  const data4 = TrigHooks.useSin(transport.frame, 1)
+  // const equations = useState({
+  //   warm: `warmColors[Math.floor((y1 * y1) * Math.abs(tanSlow) * warmColors.length * (Math.abs(tanSlow) * x1)) % warmColors.length]`,
+  //   cool: `coolColors[Math.floor((y1 * y1) * Math.abs(tanSlow) * coolColors.length * (Math.abs(tanSlow) * x1)) % coolColors.length]`,
+  //   colorFlag: 'y < 15'
+  // })
 
-  const data = { data3 }
+  // const equations = useEquations({
+  //   warm: `warmColors[Math.floor((x1 * Math.abs(sinSlow)) + (y1 * Math.abs(tanSlow))) % warmColors.length]`,
+  //   cool: `coolColors[Math.floor((x1 * Math.abs(tanSlow)) + (y1 * Math.abs(sinSlow))) % coolColors.length]`,
+  //   colorFlag: 'y < 15'
+  // })
+
+  const equations = useEquations({
+    warm: `warmColors[Math.floor((x1 * y1) * Math.abs(sinSlow)) % warmColors.length]`,
+    cool: `coolColors[Math.floor((x1 * y1) * Math.abs(sinSlow)) % coolColors.length]`,
+    colorFlag: 'y < 15'
+  })
+
+  const sinSlow = TrigHooks.useSin(transport.frame, 1)
+  const sinFast = TrigHooks.useSin(transport.frame, 10)
+  const cosSlow = TrigHooks.useCos(transport.frame, 1)
+  const cosFast = TrigHooks.useCos(transport.frame, 10)
+  const tanSlow = TrigHooks.useTan(transport.frame, 0.01)
+  const tanFast = TrigHooks.useTan(transport.frame, 1)
+
+  const data = {
+    sinSlow, sinFast,
+    cosSlow, cosFast,
+    tanSlow, tanFast
+  }
 
   return (
     <React.Fragment>
-      <div className="container">
+      <Explorer
+        transport={transport}
+        data={data}
+        equations={equations}
+      >
         <Grid
-          cellGenerator={cord => cellGenerator(data, cord)}
-          groupGenerator={cord => groupGenerator(data, cord)}
+          cellGenerator={cord => cellGenerator(equations[0], data, cord)}
           cell={[16, 16]}
         />
-      </div>
-
-      <div className="transport">
-        <Transport {...transport} />
-      </div>
-
-      <div className="inspector">
-        <Inspector data={data} />
-      </div>
-
-      <style jsx>{`
-        .container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          min-height: calc(100vh - calc(2 * var(--padding)));
-          padding-bottom: 100px;
-        }
-
-        .transport,
-        .inspector {
-          position: fixed;
-          z-index: 1000;
-        }
-
-        .transport {
-          bottom: var(--padding);
-          display: flex;
-          width: 100%;
-          justify-content: center;
-        }
-
-        .inspector {
-          top: var(--padding);
-          right: var(--padding);
-          max-width: 400px;
-        }
-      `}</style>
+      </Explorer>
     </React.Fragment>
   )
 }
