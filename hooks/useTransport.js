@@ -6,7 +6,7 @@ export default function useTransport({
   frameSize: initFrameSize,
   frame: initFrame
 }) {
-  const [isPlaying, setPlaying] = useState(initPlaying || true)
+  const [isPlaying, setPlaying] = useState(initPlaying !== undefined ? initPlaying : true)
   const [frameSize, setFrameSize] = useState(initFrameSize || 1)
   const [frame, setFrame] = useFrame({ isPlaying, frameSize, initVal: initFrame })
 

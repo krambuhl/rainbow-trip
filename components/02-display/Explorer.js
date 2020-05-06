@@ -1,11 +1,11 @@
 import Equations from '@components/display/Equations'
-import Inspector from '@components/display/Inspector'
+// import Inspector from '@components/display/Inspector'
 import Transport from '@components/display/Transport'
 import Timestamp from '@components/display/Timestamp'
 
 export default function Explorer({
   transport,
-  data,
+  // data,
   equations,
   children
 }) {
@@ -17,22 +17,13 @@ export default function Explorer({
         </div>
 
         <div className="properties">
-          <Timestamp frame={transport.frame} />
+          {/* <Timestamp frame={transport.frame} /> */}
           <Transport {...transport} />
-          <Inspector data={data} />
-        </div>
-
-        <div className="equations">
-          <Equations equations={equations} />
         </div>
       </div>
 
       <style jsx>{`
         .root {
-          display: grid;
-          grid-template-columns: 1fr 420px;
-          grid-auto-rows: 1fr auto;
-          min-height: 100vh;
           align-items: center;
           justify-content: center;
         }
@@ -42,7 +33,9 @@ export default function Explorer({
           align-items: center;
           justify-content: center;
           flex-grow: 1;
-          padding: var(--padding);
+          padding: calc(var(--padding) * 2);
+          background-color: black;
+          height: 100%;
         }
 
         .properties {
@@ -50,7 +43,7 @@ export default function Explorer({
           flex-direction: column;
           flex-basis: 480px;
           height: 100%;
-          border-left: 2px solid #333;
+          border-top: 2px solid #333;
           background-color: #000;
         }
 
@@ -77,6 +70,20 @@ export default function Explorer({
           background-color: #000;
           padding: var(--padding);
           grid-column: 1 / span 2;
+        }
+
+        @media (min-width: 840px) {
+          .root {
+            // display: grid;
+            // grid-template-columns: 1fr 420px;
+            // grid-auto-rows: 1fr auto;
+            // min-height: 100vh;
+          }
+
+          .properties {
+            // border-top: none;
+            // border-left: 2px solid #333;
+          }
         }
       `}</style>
     </React.Fragment>

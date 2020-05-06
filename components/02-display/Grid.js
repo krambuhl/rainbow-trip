@@ -30,15 +30,20 @@ export default function Grid({
       <style jsx>{`
         .container {
           display: flex;
-          flex-direction: column;
+          // flex-direction: row;
+          flex-flow: row wrap;
+          // border: ${cell[0] * 8}px solid black;
+          // overflow: hidden;
         }
 
         .group {
           display: flex;
-          flex-direction: row;
+          flex-flow: column wrap;
+          // flex-direction: row;
         }
 
         .cell {
+          position: relative;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -46,7 +51,8 @@ export default function Grid({
           width: ${cell[0]}px;
           height: ${cell[1]}px;
           margin: ${gutter[0]}px ${gutter[1]}px;
-          transition: ${transition ? transition : 'none'} ease;
+          transition: ${transition ? transition : 'none'};
+          transform-origin: left center;
         }
       `}</style>
     </React.Fragment>
