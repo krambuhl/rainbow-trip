@@ -19,7 +19,7 @@
     "classnames": "^2.2.6",
     "color": "^3.1.2",
     "cross-fetch": "^3.0.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "next": "^9.3.0",
     "pad-left": "^2.1.0",
     "polished": "^3.5.1",
