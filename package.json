@@ -18,7 +18,7 @@
     "babel-plugin-module-resolver": "^4.0.0",
     "classnames": "^2.2.6",
     "color": "^3.1.2",
-    "cross-fetch": "^3.0.4",
+    "cross-fetch": "^3.1.5",
     "lodash": "^4.17.15",
     "next": "^9.3.0",
     "pad-left": "^2.1.0",
